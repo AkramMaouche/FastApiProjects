@@ -15,6 +15,13 @@ class User(BaseModel):
         if not v: 
             raise ValueError ("name must be not empty")
         return v 
+    
+    @field_validator("user_name")
+    def user_not_have_space(cls, v): 
+        if ' ' in v : 
+            raise ValueError ("name must be without space")
+        return v 
+
 
 
 @app.post("/users/")
